@@ -10,10 +10,9 @@ const FetchPI = async (start = 0, number = 1000) => {
     }
 }
 
-const GetPI = async (numberOfDigits) => {
+const GetPI = async (numberOfDigits, dot = false, MAX = 1000) => {
     let PI = "";
 
-    const MAX = 10;
     const count = numberOfDigits / MAX;
     const integer = Math.floor(count);
 
@@ -24,13 +23,14 @@ const GetPI = async (numberOfDigits) => {
     }
 
     const remaining = numberOfDigits - PI.length;
-    if (remaining === 0) {
-        return PI;
+    if (remaining !== 0) {
+        const remainingPi = await FetchPI(PI.length, remaining);
+        PI += remainingPi;
     }
 
-    const remainingPi = await FetchPI(PI.length, remaining);
-
-    PI += remainingPi;
+    if (dot === true) {
+        PI = "3." + PI.slice(2, PI.length)
+    }
 
     return PI;
 }
