@@ -1,6 +1,6 @@
 # Benford's Law
 
-According to Benford's Law, In any general set of numbers there is probability distribution of numbers.
+According to [Benford's Law](https://en.wikipedia.org/wiki/Benford%27s_law), In any general set of numbers there is probability distribution of numbers.
 
 ![Benford's-law-probability](https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Rozklad_benforda.svg/1024px-Rozklad_benforda.svg.png)
 
