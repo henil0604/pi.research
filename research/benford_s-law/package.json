@@ -1,0 +1,15 @@
+{
+  "name": "benford_s-law",
+  "version": "1.0.0",
+  "description": "Research of Benford's Law",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon --exec \"zx index.js\"",
+    "collect": "zx index.js"
+  },
+  "author": "Henil Malaviya <henilmalaviya06@gmail.com>",
+  "license": "ISC",
+  "devDependencies": {
+    "zx": "^7.0.7"
+  }
+}

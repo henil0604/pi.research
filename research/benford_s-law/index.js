@@ -1,0 +1,1 @@
+console.log("Benford's Law")
