@@ -29,7 +29,7 @@ const GetPI = async (numberOfDigits, dot = false, MAX = 1000) => {
     }
 
     if (dot === true) {
-        PI = "3." + PI.slice(2, PI.length)
+        PI = "3." + PI.slice(1, PI.length)
     }
 
     return PI;
