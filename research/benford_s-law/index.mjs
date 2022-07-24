@@ -61,7 +61,7 @@ let Data = {
 
 // Globals Variables that will be used all over script
 const Globals = {
-    NumberOfDigits: 200000,
+    NumberOfDigits: 1000000,
     PI: "",
     PI_Splitted: []
 }
