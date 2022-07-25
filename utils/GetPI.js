@@ -53,7 +53,7 @@ const GetPI = async (numberOfDigits, dot = false, MAX = 1000) => {
     const absoluteNumberOfDigits = numberOfDigits - cachedDigits;
 
     if (cachedPI !== null && cachedDigits >= numberOfDigits) {
-        return cachedPI;
+        return cachedPI.slice(0, numberOfDigits);
     }
 
     if (cachedDigits <= numberOfDigits) {
