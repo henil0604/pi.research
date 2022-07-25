@@ -1,0 +1,15 @@
+{
+  "numbers": {
+    "0": { "count": 8, "probability": 0.08, "percentage": 8 },
+    "1": { "count": 8, "probability": 0.08, "percentage": 8 },
+    "2": { "count": 12, "probability": 0.12, "percentage": 12 },
+    "3": { "count": 12, "probability": 0.12, "percentage": 12 },
+    "4": { "count": 10, "probability": 0.1, "percentage": 10 },
+    "5": { "count": 8, "probability": 0.08, "percentage": 8 },
+    "6": { "count": 9, "probability": 0.09, "percentage": 9 },
+    "7": { "count": 8, "probability": 0.08, "percentage": 8 },
+    "8": { "count": 12, "probability": 0.12, "percentage": 12 },
+    "9": { "count": 13, "probability": 0.13, "percentage": 13 }
+  },
+  "totalDigits": 100
+}
