@@ -4,7 +4,7 @@
   "description": "This Repository Contains Research done by me on PI. I have many ideas how PI may have patterns in the digits. I will try to do some research based on given Laws by Mathematicians.",
   "main": "index.js",
   "dependencies": {
-    "filic": "^1.3.0"
+    "filic": "^1.4.0"
   },
   "devDependencies": {},
   "scripts": {
