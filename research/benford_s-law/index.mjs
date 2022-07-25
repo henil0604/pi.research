@@ -1,6 +1,10 @@
 import { spinner } from 'zx/experimental'
 
 const GetPI = require("../../utils/GetPI");
+const Filic = require("filic");
+const path = require("path");
+
+const fs = Filic.create(path.resolve(__dirname));
 
 const CollectData = async (NumberOfDigits) => {
 
@@ -95,3 +99,13 @@ const CollectData = async (NumberOfDigits) => {
 
     return Data;
 }
+
+const Sets = [1e2, 1e3, 1e4, 1e5, 1e6];
+const Data = fs.open("dir:data");
+
+Sets.forEach(async NumberOfDigits => {
+    const DataFile = Data.open(`file:${NumberOfDigits}.json`);
+    const data = await CollectData(NumberOfDigits);
+    DataFile.write(data);
+    console.log(`Written Data in ${DataFile.filename}`);
+})
