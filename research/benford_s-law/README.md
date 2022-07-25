@@ -19,3 +19,5 @@ While Researching i tested on these sets:
 I found the distribution chart as shown above.
 
 This was also discussed at [SAS Blog](https://blogs.sas.com/content/iml/2015/03/12/digits-of-pi.html). They had same probability distribution data with 10 Million Digits
+
+You can also look up at [the Data](data)
