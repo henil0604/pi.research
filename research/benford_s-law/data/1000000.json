@@ -1,0 +1,19 @@
+{
+  "numbers": {
+    "0": { "count": 99959, "probability": 0.099959, "percentage": 9.9959 },
+    "1": { "count": 99757, "probability": 0.099757, "percentage": 9.9757 },
+    "2": {
+      "count": 100026,
+      "probability": 0.100026,
+      "percentage": 10.002600000000001
+    },
+    "3": { "count": 100230, "probability": 0.10023, "percentage": 10.023 },
+    "4": { "count": 100230, "probability": 0.10023, "percentage": 10.023 },
+    "5": { "count": 100359, "probability": 0.100359, "percentage": 10.0359 },
+    "6": { "count": 99548, "probability": 0.099548, "percentage": 9.9548 },
+    "7": { "count": 99800, "probability": 0.0998, "percentage": 9.98 },
+    "8": { "count": 99985, "probability": 0.099985, "percentage": 9.9985 },
+    "9": { "count": 100106, "probability": 0.100106, "percentage": 10.0106 }
+  },
+  "totalDigits": 1000000
+}
