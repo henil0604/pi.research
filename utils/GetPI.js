@@ -4,7 +4,7 @@ const Path = require("path");
 const fs = new Filic(process.cwd());
 const PIResearchDir = fs.open("dir:.pi.research");
 const PIFile = PIResearchDir.open("file:value-of-pi");
-
+const Big = require("./big.js");
 
 const FetchPI = async (start = 0, number = 1000) => {
     const res = await fetch(`https://api.pi.delivery/v1/pi?start=${start}&numberOfDigits=${number}`);
@@ -45,7 +45,7 @@ const ApplyDot = (PI) => {
     return "3." + PI.slice(1, PI.length);
 }
 
-const GetPI = async (numberOfDigits, dot = false, MAX = 1000) => {
+const GetPI = async (numberOfDigits, big = false, dot = false, MAX = 1000) => {
     let PI = "";
 
     const cachedPI = Cache.get();
@@ -53,7 +53,7 @@ const GetPI = async (numberOfDigits, dot = false, MAX = 1000) => {
     const absoluteNumberOfDigits = numberOfDigits - cachedDigits;
 
     if (cachedPI !== null && cachedDigits >= numberOfDigits) {
-        return cachedPI.slice(0, numberOfDigits);
+        PI = cachedPI.slice(0, numberOfDigits);
     }
 
     if (cachedDigits <= numberOfDigits) {
@@ -67,6 +67,7 @@ const GetPI = async (numberOfDigits, dot = false, MAX = 1000) => {
         for (let i = 1; i <= integer; i++) {
             const pi = await FetchPI(PI.length, MAX);
             PI += pi;
+            Cache.set(PI);
         }
 
         const remaining = numberOfDigits - PI.length;
@@ -81,6 +82,11 @@ const GetPI = async (numberOfDigits, dot = false, MAX = 1000) => {
     }
     Cache.set(PI);
 
+    if (big === true) {
+        Big.DP = PI.numberOfDigits;
+
+        PI = Big(ApplyDot(PI))
+    }
     return PI;
 }
 
