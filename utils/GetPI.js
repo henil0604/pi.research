@@ -45,6 +45,10 @@ const ApplyDot = (PI) => {
     return "3." + PI.slice(1, PI.length);
 }
 
+const RemoveDot = (n) => {
+    return n.replace(".", '');
+}
+
 const GetPI = async (numberOfDigits, big = false, dot = false, MAX = 1000) => {
     let PI = "";
 
@@ -83,7 +87,7 @@ const GetPI = async (numberOfDigits, big = false, dot = false, MAX = 1000) => {
     Cache.set(PI);
 
     if (big === true) {
-        Big.DP = PI.numberOfDigits;
+        Big.DP = PI.length;
 
         PI = Big(ApplyDot(PI))
     }
@@ -92,5 +96,6 @@ const GetPI = async (numberOfDigits, big = false, dot = false, MAX = 1000) => {
 
 GetPI.Cache = Cache;
 GetPI.ApplyDot = ApplyDot;
+GetPI.RemoveDot = RemoveDot;
 
 module.exports = GetPI;
