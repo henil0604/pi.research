@@ -46,7 +46,7 @@ const ApplyDot = (PI) => {
 }
 
 const RemoveDot = (n) => {
-    return n.replace(".", '');
+    return n.replace(/\./g, '');
 }
 
 const GetPI = async (numberOfDigits, big = false, dot = false, MAX = 1000) => {
