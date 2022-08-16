@@ -7,3 +7,5 @@ This Repository Contains Research done by me On PI. I have many ideas how PI may
 ## Researches
 
 ### [Research on Benford's law](research/benford_s-law#readme)
+
+### [Research on Probability Distribution in other forms of PI](research/probability-distribution-in-other-forms-of-pi#readme)
