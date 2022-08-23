@@ -1,0 +1,56 @@
+{
+  "form": "pi-cube",
+  "numbers": {
+    "0": {
+      "count": 318,
+      "probability": 0.318,
+      "percentage": 31.8
+    },
+    "1": {
+      "count": 287,
+      "probability": 0.287,
+      "percentage": 28.7
+    },
+    "2": {
+      "count": 302,
+      "probability": 0.302,
+      "percentage": 30.2
+    },
+    "3": {
+      "count": 311,
+      "probability": 0.311,
+      "percentage": 31.1
+    },
+    "4": {
+      "count": 263,
+      "probability": 0.263,
+      "percentage": 26.3
+    },
+    "5": {
+      "count": 305,
+      "probability": 0.305,
+      "percentage": 30.5
+    },
+    "6": {
+      "count": 310,
+      "probability": 0.31,
+      "percentage": 31
+    },
+    "7": {
+      "count": 328,
+      "probability": 0.328,
+      "percentage": 32.800000000000004
+    },
+    "8": {
+      "count": 295,
+      "probability": 0.295,
+      "percentage": 29.5
+    },
+    "9": {
+      "count": 280,
+      "probability": 0.28,
+      "percentage": 28.000000000000004
+    }
+  },
+  "totalDigits": 1000
+}

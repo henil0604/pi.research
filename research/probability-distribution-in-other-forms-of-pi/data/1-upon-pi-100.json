@@ -1,0 +1,56 @@
+{
+  "form": "1-upon-pi",
+  "numbers": {
+    "0": {
+      "count": 11,
+      "probability": 0.11,
+      "percentage": 11
+    },
+    "1": {
+      "count": 10,
+      "probability": 0.1,
+      "percentage": 10
+    },
+    "2": {
+      "count": 10,
+      "probability": 0.1,
+      "percentage": 10
+    },
+    "3": {
+      "count": 9,
+      "probability": 0.09,
+      "percentage": 9
+    },
+    "4": {
+      "count": 6,
+      "probability": 0.06,
+      "percentage": 6
+    },
+    "5": {
+      "count": 10,
+      "probability": 0.1,
+      "percentage": 10
+    },
+    "6": {
+      "count": 9,
+      "probability": 0.09,
+      "percentage": 9
+    },
+    "7": {
+      "count": 13,
+      "probability": 0.13,
+      "percentage": 13
+    },
+    "8": {
+      "count": 12,
+      "probability": 0.12,
+      "percentage": 12
+    },
+    "9": {
+      "count": 10,
+      "probability": 0.1,
+      "percentage": 10
+    }
+  },
+  "totalDigits": 100
+}

@@ -1,0 +1,56 @@
+{
+  "form": "square-root-of-pi",
+  "numbers": {
+    "0": {
+      "count": 10033,
+      "probability": 0.10033,
+      "percentage": 10.033
+    },
+    "1": {
+      "count": 10051,
+      "probability": 0.10051,
+      "percentage": 10.051
+    },
+    "2": {
+      "count": 10111,
+      "probability": 0.10111,
+      "percentage": 10.111
+    },
+    "3": {
+      "count": 9966,
+      "probability": 0.09966,
+      "percentage": 9.966
+    },
+    "4": {
+      "count": 9926,
+      "probability": 0.09926,
+      "percentage": 9.926
+    },
+    "5": {
+      "count": 10024,
+      "probability": 0.10024,
+      "percentage": 10.024
+    },
+    "6": {
+      "count": 9921,
+      "probability": 0.09921,
+      "percentage": 9.921000000000001
+    },
+    "7": {
+      "count": 9943,
+      "probability": 0.09943,
+      "percentage": 9.943
+    },
+    "8": {
+      "count": 10086,
+      "probability": 0.10086,
+      "percentage": 10.086
+    },
+    "9": {
+      "count": 9940,
+      "probability": 0.0994,
+      "percentage": 9.94
+    }
+  },
+  "totalDigits": 100000
+}

@@ -1,0 +1,20 @@
+{
+  "name": "probability-distribution-in-other-forms-of-pi",
+  "version": "1.0.0",
+  "description": "Research of Probability Distribution in other forms of Pi",
+  "main": "index.mjs",
+  "scripts": {
+    "dev": "nodemon --exec \"zx index.mjs\" --ignore data",
+    "collect": "zx index.mjs && npm run format",
+    "format": "prettier --config ./.prettierrc --write data"
+  },
+  "author": "Henil Malaviya <henilmalaviya06@gmail.com>",
+  "license": "ISC",
+  "devDependencies": {
+    "prettier": "^2.7.1",
+    "zx": "^7.0.7"
+  },
+  "dependencies": {
+    "filic": "^1.4.0"
+  }
+}
