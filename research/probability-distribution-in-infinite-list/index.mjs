@@ -19,6 +19,7 @@ console.log = function () {
 
 
 const CollectData = async (label, Generator, props) => {
+    const START_TIME = Date.now();
 
     // This Data Object Represents the number of counted digit and total Number of digits that was counted and other information
     let Data = {
@@ -110,7 +111,7 @@ const CollectData = async (label, Generator, props) => {
         };
     }
 
-    console.log(`Saving Final Data in "${Globals.File.filename}"`);
+    console.log(`Saving Final Data in "${Globals.File.filename}" ${Date.now() - START_TIME}ms`);
     Globals.File.write(JSON.stringify(data, null, 4));
 
     return data;
@@ -132,6 +133,19 @@ const Generators = [
         },
         sets: [1e2, 1e3, 1e4, 1e5, 1e6, 1e7],
         label: 'square root of 2 - {digits}'
+    },
+    {
+        generator: (props) => {
+            console.log(`Generating Square Root of 3 with ${props.Digits} digits`)
+            Big.DP = props.Digits;
+            return {
+                Number: Big(3).sqrt(),
+                digits: props.Digits,
+                File: Data.open(`square-root-of-3-${props.Digits}.json`)
+            }
+        },
+        sets: [1e2, 1e3, 1e4, 1e5, 1e6, 1e7],
+        label: 'square root of 3 - {digits}'
     },
 ];
 
