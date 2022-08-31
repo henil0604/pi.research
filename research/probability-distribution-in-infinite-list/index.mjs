@@ -47,58 +47,53 @@ const CollectData = async (label, Generator, props) => {
         File: null
     }
 
-    await spinner("Generating Number...", async () => {
-        $.verbose = true
-        // Generating Number
-        const Generated = await Generator(props);
-        Globals.Number = Generated.Number;
-        Globals.File = Generated.File;
-        Data.digits = Generated.digits;
-        Globals.Number_Splitted = GetPI.RemoveDot(Globals.Number.toString()).split('');
-    })
+    $.verbose = true
+    // Generating Number
+    const Generated = await Generator(props);
+    Globals.Number = Generated.Number;
+    Globals.File = Generated.File;
+    Data.digits = Generated.digits;
+    Globals.Number_Splitted = GetPI.RemoveDot(Globals.Number.toString()).split('');
 
     // Setting total digits to `Data` and Big.DP
     Data.digits = Big.DP = Data.digits;
 
-    await spinner(async () => {
+    // Running the loop to count every digit
+    for (let i = 0; i < Data.digits; i++) {
+        if (i % 100 === 0) {
+            console.log(`Processing ${i}th digit`);
+        }
 
-        // Running the loop to count every digit
-        for (let i = 0; i < Data.digits; i++) {
-            if (i % 100 === 0) {
-                console.log(`Processing ${i}th digit`);
-            }
+        if (i % 100 === 0) {
+            // Generate Temp Data Object
+            let data = JSON.parse(JSON.stringify(Data));
 
-            if (i % 100 === 0) {
-                // Generate Temp Data Object
-                let data = JSON.parse(JSON.stringify(Data));
+            for (const key in data.numbers) {
 
-                for (const key in data.numbers) {
+                let count = data.numbers[key];
 
-                    let count = data.numbers[key];
-
-                    data.numbers[key] = {
-                        count: count,
-                        probability: (count / data.counted) || 0
-                    };
-
-                }
-
-                console.log(`Saving Data in "${Globals.File.filename}"`);
-                Globals.File.write(JSON.stringify(data, null, 4));
+                data.numbers[key] = {
+                    count: count,
+                    probability: (count / data.counted) || 0
+                };
 
             }
 
-            const digitString = Globals.Number_Splitted[i];
-            const digitNumber = parseInt(digitString);
-
-            if (digitString === '.') { continue; };
-
-            Data.numbers[digitNumber]++;
-            Data.counted++;
+            console.log(`Saving Data in "${Globals.File.filename}"`);
+            Globals.File.write(JSON.stringify(data, null, 4));
 
         }
 
-    });
+        const digitString = Globals.Number_Splitted[i];
+        const digitNumber = parseInt(digitString);
+
+        if (digitString === '.') { continue; };
+
+        Data.numbers[digitNumber]++;
+        Data.counted++;
+
+    }
+
 
     let data = JSON.parse(JSON.stringify(Data));
 
@@ -125,8 +120,11 @@ const Generators = [
         generator: (props) => {
             console.log(`Generating Square Root of 2 with ${props.Digits} digits`)
             Big.DP = props.Digits;
+            const START = Date.now();
+            const Number = Big(2).sqrt()
+            console.log(`Generated Square Root of 2 with ${props.Digits} in ${Date.now() - START}ms`)
             return {
-                Number: Big(2).sqrt(),
+                Number,
                 digits: props.Digits,
                 File: Data.open(`square-root-of-2-${props.Digits}.json`)
             }
@@ -138,8 +136,10 @@ const Generators = [
         generator: (props) => {
             console.log(`Generating Square Root of 3 with ${props.Digits} digits`)
             Big.DP = props.Digits;
+            const Number = Big(3).sqrt()
+            console.log(`Generated Square Root of 3 with ${props.Digits} in ${Date.now() - START}ms`)
             return {
-                Number: Big(3).sqrt(),
+                Number,
                 digits: props.Digits,
                 File: Data.open(`square-root-of-3-${props.Digits}.json`)
             }
@@ -158,13 +158,15 @@ const Generators = [
             for (let j = 0; j < generator.sets.length; j++) {
                 const Digits = generator.sets[j];
                 let label = generator.label.replace('{digits}', Digits);
-                new TPromise(async (resolve) => {
-                    await CollectData(label, generator.generator, {
+                new TPromise((resolve) => {
+                    CollectData(label, generator.generator, {
                         Digits
-                    })
+                    }).then(resolve)
                 })
             }
         }
+
+        await CollectData(generator.label, generator.generator)
 
     }
 })()
