@@ -120,13 +120,14 @@ const Generators = [
                 File: Data.open(`square-root-of-2-${props.Digits}.json`)
             }
         },
-        set: [1e1, 1e2, 1e3, 1e4, 1e5, 1e6],
+        set: [1e2, 1e3, 1e4, 1e5, 1e6],
         label: 'square root of 2 - {digits}'
     },
     {
         generator: (props) => {
             console.log(`Generating Square Root of 3 with ${props.Digits} digits`)
             Big.DP = props.Digits;
+            const START = Date.now();
             const Number = Big(3).sqrt()
             console.log(`Generated Square Root of 3 with ${props.Digits} in ${Date.now() - START}ms`)
             return {
@@ -138,6 +139,22 @@ const Generators = [
         set: [1e2, 1e3, 1e4, 1e5, 1e6],
         label: 'square root of 3 - {digits}'
     },
+    {
+        generator: (props) => {
+            console.log(`Generating Square Root of 5 with ${props.Digits} digits`)
+            Big.DP = props.Digits;
+            const START = Date.now();
+            const Number = Big(5).sqrt()
+            console.log(`Generated Square Root of 5 with ${props.Digits} in ${Date.now() - START}ms`)
+            return {
+                Number,
+                digits: props.Digits,
+                File: Data.open(`square-root-of-5-${props.Digits}.json`)
+            }
+        },
+        set: [1e2, 1e3, 1e4, 1e5, 1e6],
+        label: 'square root of 5 - {digits}'
+    },
 ];
 
 ; (async function () {
@@ -145,7 +162,11 @@ const Generators = [
     for (let i = 0; i < Generators.length; i++) {
         const generator = Generators[i];
 
+        console.log("----------------")
+
         await CollectData(generator.label, generator.generator, generator.set || generator.digits)
+
+        console.log("----------------")
 
     }
 })()
