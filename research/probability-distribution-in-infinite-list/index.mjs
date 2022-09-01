@@ -18,7 +18,7 @@ console.log = function () {
 }
 
 
-const CollectData = async (label, Generator, props) => {
+const CollectData = async (label, Generator, Set, props) => {
     const START_TIME = Date.now();
 
     // This Data Object Represents the number of counted digit and total Number of digits that was counted and other information
@@ -44,19 +44,25 @@ const CollectData = async (label, Generator, props) => {
     const Globals = {
         Number: "",
         Number_Splitted: [],
-        File: null
+        File: null,
+        Digits: Array.isArray(Set) ? Math.max(...Set) : Set
     }
 
-    $.verbose = true
+    console.log(`Maximum of Set Identified: ${Globals.Digits}`)
+    Data.label = label.replace("{digits}", Globals.Digits);
+
     // Generating Number
-    const Generated = await Generator(props);
+    const Generated = await Generator({
+        Digits: Globals.Digits,
+        ...props
+    });
     Globals.Number = Generated.Number;
     Globals.File = Generated.File;
     Data.digits = Generated.digits;
     Globals.Number_Splitted = GetPI.RemoveDot(Globals.Number.toString()).split('');
 
     // Setting total digits to `Data` and Big.DP
-    Data.digits = Big.DP = Data.digits;
+    Data.digits = Big.DP = Globals.Digits;
 
     // Running the loop to count every digit
     for (let i = 0; i < Data.digits; i++) {
@@ -64,24 +70,9 @@ const CollectData = async (label, Generator, props) => {
             console.log(`Processing ${i}th digit`);
         }
 
-        if (i % 100 === 0) {
-            // Generate Temp Data Object
-            let data = JSON.parse(JSON.stringify(Data));
-
-            for (const key in data.numbers) {
-
-                let count = data.numbers[key];
-
-                data.numbers[key] = {
-                    count: count,
-                    probability: (count / data.counted) || 0
-                };
-
-            }
-
-            console.log(`Saving Data in "${Globals.File.filename}"`);
-            Globals.File.write(JSON.stringify(data, null, 4));
-
+        if (Array.isArray(Set) && Set.includes(i) && i !== Globals.Digits) {
+            console.log(`Found Sub Generator: ${i}`)
+            await CollectData(label, Generator, i, props)
         }
 
         const digitString = Globals.Number_Splitted[i];
@@ -94,7 +85,6 @@ const CollectData = async (label, Generator, props) => {
 
     }
 
-
     let data = JSON.parse(JSON.stringify(Data));
 
     for (const key in data.numbers) {
@@ -104,6 +94,7 @@ const CollectData = async (label, Generator, props) => {
             count: count,
             probability: (count / data.counted) || 0
         };
+        data.numbers[key].percentage = data.numbers[key].probability * 100
     }
 
     console.log(`Saving Final Data in "${Globals.File.filename}" ${Date.now() - START_TIME}ms`);
@@ -129,7 +120,7 @@ const Generators = [
                 File: Data.open(`square-root-of-2-${props.Digits}.json`)
             }
         },
-        sets: [1e2, 1e3, 1e4, 1e5, 1e6, 1e7],
+        set: [1e1, 1e2, 1e3, 1e4, 1e5, 1e6],
         label: 'square root of 2 - {digits}'
     },
     {
@@ -144,7 +135,7 @@ const Generators = [
                 File: Data.open(`square-root-of-3-${props.Digits}.json`)
             }
         },
-        sets: [1e2, 1e3, 1e4, 1e5, 1e6, 1e7],
+        set: [1e2, 1e3, 1e4, 1e5, 1e6],
         label: 'square root of 3 - {digits}'
     },
 ];
@@ -154,19 +145,7 @@ const Generators = [
     for (let i = 0; i < Generators.length; i++) {
         const generator = Generators[i];
 
-        if (generator.sets) {
-            for (let j = 0; j < generator.sets.length; j++) {
-                const Digits = generator.sets[j];
-                let label = generator.label.replace('{digits}', Digits);
-                new TPromise((resolve) => {
-                    CollectData(label, generator.generator, {
-                        Digits
-                    }).then(resolve)
-                })
-            }
-        }
-
-        await CollectData(generator.label, generator.generator)
+        await CollectData(generator.label, generator.generator, generator.set || generator.digits)
 
     }
 })()
